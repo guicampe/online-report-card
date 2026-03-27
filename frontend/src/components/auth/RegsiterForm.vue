@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const emit = defineEmits(["goToLogin"]);
 const authStore = useAuthStore();
 const name = ref("");
@@ -37,7 +39,6 @@ const handleRegister = async () => {
 
     try {
         isLoading.value = true;
-        await new Promise(resolve => setTimeout(resolve, 2000));
         const response = await fetch("http://localhost:3000/auth/register", {
             method: "POST",
             headers: {
@@ -58,11 +59,14 @@ const handleRegister = async () => {
         }
 
         authStore.setToken(data.token);
+        isLoading.value = false;
+        registered.value = true;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        router.push("/user");
     } catch (error) {
         credentialsError.value = "Não foi possível conectar ao servidor. Tente novamente."
     } finally {
         isLoading.value = false;
-        registered.value = true;
     }
 };
 </script>
@@ -93,7 +97,7 @@ const handleRegister = async () => {
             <span class="text-sm">Aguarde...</span>
         </div>
         <div v-if="registered" class="text-center mt-2 text-green-500 font-bold">
-            <span>√ Usuário registrado com sucesso</span>
+            <span>√ Usuário registrado com sucesso! Redirecionando...</span>
         </div>
     </form>
 </template>

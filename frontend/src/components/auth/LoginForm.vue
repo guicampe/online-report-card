@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from "../../stores/auth";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const emit = defineEmits(["goToRegister"]);
 const authStore = useAuthStore();
 const email = ref("");
@@ -28,7 +30,6 @@ const handleSubmit = async () => {
 
     try {
         isLoading.value = true;
-        await new Promise(resolve => setTimeout(resolve, 2000));
         const response = await fetch("http://localhost:3000/auth/login", {
             method: "POST",
             headers: {
@@ -48,6 +49,7 @@ const handleSubmit = async () => {
         }
 
         authStore.setToken(data.token);
+        router.push("/user");
     } catch (error) {
         credentialsError.value = "Não foi possível conectar ao servidor. Tente novamente"
     } finally {
