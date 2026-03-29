@@ -52,6 +52,8 @@ const handleRegister = async () => {
         })
 
         const data = await response.json();
+        console.log(data)
+        console.log(response.ok)
 
         if (!response.ok) {
             credentialsError.value = data.message;

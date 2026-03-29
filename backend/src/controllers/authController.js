@@ -18,9 +18,15 @@ const register = async (req, res, next) => {
             "INSERT INTO grades (user_id) VALUES ($1)",
             [result.rows[0].id]
         )
+
+        const token = jwt.sign(
+            { id: result.rows[0].id, email: result.rows[0].email, role: result.rows[0].role },
+            process.env.JWT_SECRET_KEY,
+            { expiresIn: process.env.JWT_EXPIRES_IN }
+        )
         
 
-        res.status(201).json(result.rows[0]);
+        res.status(201).json({ token });
     } catch (error) {
         next(error);
     }
