@@ -2,21 +2,6 @@ const pool = require("../config/db");
 const { pushIfDefined } = require("../utils/pushIfDefined");
 const { verifyRowsLength } = require("../utils/verifyRowsLength");
 
-const createGrades = async (req, res, next) => {
-    try {
-        const { userId } = req.params;
-
-        const result = await pool.query(
-            "INSERT INTO grades (user_id) VALUES ($1) RETURNING *",
-            [userId]
-        );
-
-        res.status(201).json(result.rows[0]);
-    } catch (error) {
-        next(error);
-    }
-}
-
 const updateGrades = async (req, res, next) => {
     try {
         const { userId } = req.params;
@@ -97,4 +82,4 @@ const getMyGrades = async (req, res, next) => {
     }
 }
 
-module.exports = { createGrades, updateGrades, getAllGrades, getMyGrades }
+module.exports = { updateGrades, getAllGrades, getMyGrades }
