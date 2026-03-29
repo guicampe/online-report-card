@@ -20,17 +20,27 @@ const updateGrades = async (req, res, next) => {
         }
 
         const gradeResult = await pool.query(
-            "SELECT grade1, grade2 FROM grades WHERE user_id = $1",
+            "SELECT grade1, grade2, total_classes, absences FROM grades WHERE user_id = $1",
             [userId]
         );
 
         const current = gradeResult.rows[0];
+
         const g1 = grade1 !== undefined ? grade1 : current.grade1;
         const g2 = grade2 !== undefined ? grade2 : current.grade2;
 
         if (g1 !== null && g2 !== null) {
             fields.push(`average = $${fields.length + 1}`);
             values.push((parseFloat(g1) + parseFloat(g2)) / 2);
+        }
+
+        const tc = total_classes !== undefined ? total_classes : current.total_classes;
+        const ab = absences !== undefined ? absences : current.absences;
+
+        if (tc !== null && ab !== null) {
+            const attendance = ((tc - ab) / tc) * 100;
+            fields.push(`attendance = $${fields.length + 1}`);
+            values.push(Math.ceil(attendance));
         }
 
         values.push(userId);
