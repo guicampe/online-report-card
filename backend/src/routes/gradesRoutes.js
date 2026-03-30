@@ -5,12 +5,10 @@ const gradesController = require("../controllers/gradesController");
 
 router.get("/", authenticate, authorize("admin"), gradesController.getAllGrades);
 router.get("/me", authenticate, gradesController.getMyGrades);
-router.get("/:userId", authenticate, authorize("admin"));
+router.get("/:userId", authenticate, authorize("admin"), gradesController.getGradesById);
 
-router.post("/:userId/:subject", authenticate, authorize("admin"));
+router.patch("/:userId/:subjectId",  authenticate, authorize("admin"), gradesController.updateGrades);
 
-router.patch("/:userId/:subjectId",  authenticate, authorize("admin"));
-
-router.delete("/:userId/:subjectId", authenticate, authorize("admin"));
+router.delete("/:userId/:subjectId", authenticate, authorize("admin"), gradesController.deleteGrades);
 
 module.exports = router;
