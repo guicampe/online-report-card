@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useUsers } from "@/composables/useUsers";
+import Logout from "@/components/layout/Logout.vue";
 
 const { users, fetchUsers } = useUsers();
 
@@ -10,10 +11,8 @@ onMounted(async () => {
 </script>
 
 <template>
-    <p>Você é um ADMIN</p>
-    <h1>Em construção...</h1>
-    <h1>Lista de usuários</h1>
-    <table>
+    <Logout />
+    <table class="mx-auto">
         <thead>
             <tr>
                 <th>Nome</th>
