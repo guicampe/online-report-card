@@ -7,6 +7,10 @@ const goToUsers = () => {
     router.push("/admin/users");
 }
 
+const goToSubjects = () => {
+    router.push("admin/subjects");
+}
+
 defineProps({
     userName: String,
 })
@@ -26,6 +30,7 @@ defineProps({
         </div>
 
         <div 
+            @click="goToSubjects"
             class="bg-blue-500 w-1/4 h-24 flex justify-center items-center rounded-md shadow-sm text-gray-300 font-bold text-3xl cursor-pointer duration-250 ease hover:bg-blue-400"
         >
             <p>Matérias</p>
