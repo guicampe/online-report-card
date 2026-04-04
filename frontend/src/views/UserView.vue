@@ -2,8 +2,8 @@
 import { onMounted } from "vue";
 import { useUser } from "@/composables/useUser";
 import { useGrades } from "@/composables/useGrades";
-import UserAppHeader from "@/components/layout/UserAppHeader.vue";
-import UserTable from "@/components/layout/UserTable.vue";
+import UserAppHeader from "@/components/user/UserAppHeader.vue";
+import UserTable from "@/components/user/UserTable.vue";
 import Logout from "@/components/layout/Logout.vue";
 
 const { user, fetchUser } = useUser();
