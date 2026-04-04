@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useSubjects } from "@/composables/useSubjects";
+import DataTable from "./DataTable.vue";
 
 const { subjects, fetchSubjects } = useSubjects();
 
@@ -10,11 +11,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <main>
-        <p>Lista de matérias</p>
-
-        <ul v-for="subject in subjects">
-            <li>{{ subject.name }}</li>
-        </ul>
-    </main>
+    <DataTable
+        title="Matérias"
+        :items="subjects",
+        :columns="[{ label: 'Matéria', key:'name' }]"
+    />
 </template>

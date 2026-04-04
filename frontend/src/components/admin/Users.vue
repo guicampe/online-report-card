@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import { useUsers } from "@/composables/useUsers";
+import DataTable from "./DataTable.vue";
 
 const { users, fetchUsers } = useUsers();
 
@@ -10,11 +11,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <main>
-        <p>Lista de usuários</p>
-
-        <ul v-for="user in users">
-            <li>{{ user.name }}</li>
-        </ul>
-    </main>
+    <DataTable
+        title="Alunos"
+        :items="users"
+        :columns="[{ label: 'Nome', key: 'name' }, { label: 'Email', key: 'email' }]"
+    />
 </template>
