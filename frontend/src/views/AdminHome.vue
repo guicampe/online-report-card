@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <main class="border border-gray-400 mx-auto w-5/6 rounded-md">
+    <main class="border border-gray-400 mx-auto w-5/6 h-64 rounded-md">
         <p class="mb-10 p-2 text-2xl text-gray-800 bg-blue-300 w-full rounded-t-md shadow-lg">
             Bem vindo de volta,
             <span>{{ userName }}</span>

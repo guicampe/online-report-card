@@ -18,7 +18,7 @@ onMounted(async () => {
                 title="Alunos"
                 :items="users"
                 :columns="[{ label: 'Nome', key: 'name' }]"
-                @row-click="(user) => $router.push(`/users/${user.id}`)"
+                @row-click="(user) => $router.push(`/admin/${user.id}`)"
             />
         </div>
 </template>

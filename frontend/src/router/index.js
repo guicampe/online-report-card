@@ -4,6 +4,7 @@ import UserView from '@/views/UserView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import Users from '@/components/admin/Users.vue'
 import Subjects from '@/components/admin/Subjects.vue'
+import User from '@/components/admin/User.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       path: "/admin/users",
       name: "adminUsers",
       component: Users
+    },
+    {
+      path: "/admin/:id",
+      name: "adminUser",
+      component: User
     },
     {
       path: "/admin/subjects",
