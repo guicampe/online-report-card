@@ -10,6 +10,8 @@ defineProps({
         required: true
     }
 })
+
+defineEmits(["row-click"])
 </script>
 
 <template>
@@ -22,9 +24,12 @@ defineProps({
         <ul
             class="w-full border border-gray-600 divide-y divide-gray-600 rounded-md bg-gray-100">
             <li v-for="item in items" :key="item.id"
-                class="p-1 even:bg-gray-300 flex gap-4"
+                class="p-1 even:bg-gray-300 first:rounded-t-md last:rounded-b-md flex justify-between cursor-pointer transition-all duration-200 hover:px-3 hover:bg-indigo-200 hover:shadow-md first:hover:rounded-t-md last:hover:rounded-b-md"
+                @click="$emit('row-click', item)"
             >
-                <span v-for="col in columns" :key="col.key">
+                <span v-for="col in columns" :key="col.key"
+                    class="mx-1"
+                >
                     {{ item[col.key] }}
                 </span>
             </li>

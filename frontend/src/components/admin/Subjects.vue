@@ -18,6 +18,7 @@ onMounted(async () => {
             title="Matérias"
             :items="subjects",
             :columns="[{ label: 'Matéria', key:'name' }]"
+            @row-click="(subject) => $router.push(`/subjects/${subject.id}`)"
         />
     </div>
 </template>

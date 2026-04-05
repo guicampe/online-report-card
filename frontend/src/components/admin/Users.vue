@@ -17,7 +17,8 @@ onMounted(async () => {
             <DataTable
                 title="Alunos"
                 :items="users"
-                :columns="[{ label: 'Nome', key: 'name' }, { label: 'Email', key: 'email' }]"
+                :columns="[{ label: 'Nome', key: 'name' }]"
+                @row-click="(user) => $router.push(`/users/${user.id}`)"
             />
         </div>
 </template>
