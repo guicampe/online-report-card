@@ -44,6 +44,16 @@ const router = createRouter({
       component: UserView,
       meta: { requiresAuth: true }
     },
+    {
+      path: "/unauthorized",
+      name: "unauthorized",
+      component: () => import("@/views/UnauthorizedView.vue")
+    },
+    {
+      path: "/unauthenticated",
+      name: "unauthenticated",
+      component: () => import("@/views/UnauthenticatedView.vue")
+    },
   ],
 })
 
@@ -60,16 +70,12 @@ router.beforeEach((to) => {
     localStorage.removeItem("token");
   }
 
-  if (to.meta.requiresAdmin) {
-    if (!token || role !== "admin") {
-      return "/";
-    }
+  if (to.meta.requiresAdmin && (!token || role !== "admin")) {
+    return token ? "/unauthorized" : "/unauthenticated";
   }
 
-  if (to.meta.requiresAuth) {
-    if (!token) {
-      return "/";
-    }
+  if (to.meta.requiresAuth && !token) {
+    return "/unauthenticated";
   }
 })
 
