@@ -3,9 +3,9 @@ import { useAuthStore } from "@/stores/auth";
 
 export const useUserByIdGrades = () => {
     const authStore = useAuthStore();
-    const subjects = ref([]);
+    const grades = ref([]);
 
-    const fetchSubjectsById = async (id) => {
+    const fetchGradesById = async (id) => {
         if (!authStore.token) return;
 
         const request = await fetch(`http://localhost:3000/admin/grades/${id}`, {
@@ -15,8 +15,8 @@ export const useUserByIdGrades = () => {
         })
 
         const data = await request.json();
-        subjects.value = Array.isArray(data) ? data : [];
+        grades.value = Array.isArray(data) ? data : [];
     }
 
-    return { subjects, fetchSubjectsById }
+    return { grades, fetchGradesById }
 }

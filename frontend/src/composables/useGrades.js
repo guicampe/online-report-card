@@ -10,7 +10,7 @@ export const useGrades = () => {
 
         grades.value = null;
 
-        const request = await fetch("http://localhost:3000/grades/me", {
+        const request = await fetch("http://localhost:3000/users/grades/", {
             headers: {
                 "Authorization": `Bearer ${authStore.token}`
             }

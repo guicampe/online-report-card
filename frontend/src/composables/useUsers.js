@@ -8,7 +8,7 @@ export const useUsers = () => {
     const fetchUsers = async () => {
         if (!authStore.token) return;
 
-        const request = await fetch("http://localhost:3000/users/", {
+        const request = await fetch("http://localhost:3000/admin/users/", {
             headers: {
                 "Authorization": `Bearer ${authStore.token}`
             }

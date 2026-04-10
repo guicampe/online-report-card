@@ -9,11 +9,11 @@ import UserPersonalInfo from '@/components/ui/admin/UserPersonalInfo.vue';
 
 const route = useRoute();
 const { userById, fetchUserById } = useUserById();
-const { subjects, fetchSubjectsById } = useUserByIdGrades();
+const { grades, fetchGradesById } = useUserByIdGrades();
 
 onMounted(async () => {
     await fetchUserById(route.params.id);
-    await fetchSubjectsById(route.params.id);
+    await fetchGradesById(route.params.id);
 })
 </script>
 
@@ -26,7 +26,7 @@ onMounted(async () => {
             :email="userById?.email"
         />
         <UserSubjects 
-            :subjects="subjects"
+            :subjects="grades"
         />
     </main>
 </template>

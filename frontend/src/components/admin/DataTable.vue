@@ -30,7 +30,7 @@ defineEmits(["row-click"])
             </li>
         </ul>
         <div class="w-full flex justify-start gap-5">
-            <NavCard label="Adicionar" path="#" icon="group_add" padding="p-3" />
+            <NavCard label="Adicionar" icon="group_add" padding="p-3" />
         </div>
     </main>
 </template>
