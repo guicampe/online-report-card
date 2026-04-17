@@ -27,6 +27,7 @@ onMounted(async () => {
             :title="subject?.name"
             :items="subjects"
             :columns="[{ label: 'Aluno', key: 'user_name' }]"
+            @row-click="(user) => $router.push(`/admin/${user.user_id}`)"
         >
         <template #actions>
             <AddUserInput @created="fetchSubjectsById(route.params.id)" />

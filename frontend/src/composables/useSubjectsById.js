@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
+import router from "@/router";
 
 export const useSubjectsById = () => {
     const authStore = useAuthStore();
@@ -12,7 +13,12 @@ export const useSubjectsById = () => {
             headers: {
                 "Authorization": `Bearer ${authStore.token}`
             }
-        })
+        });
+
+        if (request.status === 404) {
+            router.push("/not-found");
+            return;
+        }
 
         const data = await request.json();
         subjects.value = Array.isArray(data) ? data : [];
