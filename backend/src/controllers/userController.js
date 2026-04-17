@@ -35,13 +35,12 @@ const getUserById = async (req, res, next) => {
 
 const getAvailableSubjects = async (req, res, next) => {
     try {
-        const { userId } = req.params;
+        const { userId } = req.params;        
         const result = await pool.query(`
                 SELECT id, name FROM subjects
                 WHERE id NOT IN(
                     SELECT subject_id FROM grades WHERE user_id = $1
                 )
-                AND role != 'admin'
                 ORDER BY name ASC
             `, [userId]);
 

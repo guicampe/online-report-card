@@ -72,7 +72,7 @@ const getSubjectsById = async (req, res, next) => {
             `, [subjectId]
         );
 
-        if (verifyRowsLength(result.rows, res, 404, "Nenhuma aluno(a) encontrado(a)")) return; 
+        if (verifyRowsLength(result.rows, res, 200, "Nenhum aluno(a) encontrado(a)")) return; 
         
         res.status(200).json(result.rows);
     } catch (error) {
