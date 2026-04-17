@@ -12,7 +12,12 @@ export const useUserByIdGrades = () => {
             headers: {
                 "Authorization": `Bearer ${authStore.token}`
             }
-        })
+        });
+
+        if (request.status === 404) {
+            grades.value = [];
+            return;
+        }
 
         const data = await request.json();
         grades.value = Array.isArray(data) ? data : [];
