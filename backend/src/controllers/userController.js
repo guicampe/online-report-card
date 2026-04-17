@@ -6,6 +6,7 @@ const getAllUsers = async (req, res, next) => {
         const result = await pool.query(`
             SELECT id, name, email
             FROM users
+            WHERE role != 'admin'
             ORDER BY name ASC
         `)
 
@@ -40,6 +41,7 @@ const getAvailableSubjects = async (req, res, next) => {
                 WHERE id NOT IN(
                     SELECT subject_id FROM grades WHERE user_id = $1
                 )
+                AND role != 'admin'
                 ORDER BY name ASC
             `, [userId]);
 

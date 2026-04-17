@@ -88,6 +88,7 @@ const getAvailableUsers = async (req, res, next) => {
                 WHERE id NOT IN(
                     SELECT user_id FROM grades WHERE subject_id = $1
                 )
+                AND role != 'admin'
                 ORDER BY name ASC
             `, [subjectId]);
             
