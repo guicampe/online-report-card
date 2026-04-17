@@ -17,7 +17,7 @@ router.get("/subjects/:subjectId/grades", authenticate, authorize("admin"), subj
 router.post("/subjects", authenticate, authorize("admin"), subjectsController.createSubject);
 router.post("/subjects/:subjectId/grades", authenticate, authorize("admin"), subjectsController.addStudentToSubject);
 router.put("/subjects/:id", authenticate, authorize("admin"), subjectsController.updateSubject);
-router.delete("/subjects/:id", authenticate, authorize("admin"), subjectsController.deleteSubject);
+router.delete("/subjects/:subjectId", authenticate, authorize("admin"), subjectsController.deleteSubject);
 
 router.get("/users", authenticate, authorize("admin"), userController.getAllUsers);
 router.get("/users/:id", authenticate, authorize("admin"), userController.getUserById);

@@ -150,16 +150,16 @@ const updateSubject = async (req, res, next) => {
 
 const deleteSubject = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { subjectId } = req.params;
 
         const result = await pool.query(
             "DELETE FROM subjects WHERE id = $1 RETURNING id",
-            [id]
+            [subjectId]
         )
 
         if (verifyRowsLength(result.rows, res, 404, "Matéria não encontrada")) return;
 
-        res.status(204).json();
+        res.status(204).send();
     } catch (error) {
         next(error);
     }

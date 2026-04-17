@@ -5,7 +5,6 @@ import Back from "@/components/layout/Back.vue";
 import DataList from "@/components/admin/DataList.vue";
 import AddSubjectInput from "@/components/admin/AddSubjectInput.vue";
 
-
 const { subjects, fetchSubjects } = useSubjects();
 
 onMounted(async () => {
@@ -21,6 +20,7 @@ onMounted(async () => {
             :items="subjects",
             :columns="[{ label: 'Matéria', key:'name' }]"
             @row-click="(subject) => $router.push({ name: 'subjectsById', params: { id: subject.id } })"
+            @delete-subject="fetchSubjects"
             >
             <template #actions>
                 <AddSubjectInput @created="fetchSubjects" />
