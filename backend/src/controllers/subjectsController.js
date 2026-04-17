@@ -99,7 +99,6 @@ const addStudentToSubject = async (req, res, next) => {
     try {
         const { subjectId } = req.params;
         const { userId } = req.body;
-        console.log("subjectId:", subjectId, " userId:", userId);
 
         const result = await pool.query(`
                 INSERT INTO grades (user_id, subject_id)

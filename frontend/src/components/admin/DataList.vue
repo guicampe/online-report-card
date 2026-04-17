@@ -1,6 +1,4 @@
 <script setup>
-import NavCard from '../ui/NavCard.vue';
-
 defineProps({
     title: String,
     items: {

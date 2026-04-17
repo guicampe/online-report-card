@@ -1,5 +1,5 @@
 <script setup>
-import NavCard from '../NavCard.vue';
+import AddSubjectToUser from '@/components/admin/AddSubjectToUser.vue';
 
 defineProps({
     subjects: {
@@ -7,6 +7,8 @@ defineProps({
         required: true,
     }
 })
+
+defineEmits(["created"]);
 </script>
 
 <template>
@@ -40,7 +42,7 @@ defineProps({
                 </tbody>
             </table>
             <p v-else class="text-gray-800 font-bold text-2xl">Ainda não há matérias cadastradas</p>
-            <NavCard label="Adicionar Matéria" icon="assignment_add" padding="p-1" class="text-xl mt-1" />
+            <AddSubjectToUser @created="$emit('created')" class="mt-2" />
         </div>
     </div>
 </template>

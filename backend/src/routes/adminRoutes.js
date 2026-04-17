@@ -20,5 +20,6 @@ router.delete("/subjects/:id", authenticate, authorize("admin"), subjectsControl
 
 router.get("/users", authenticate, authorize("admin"), userController.getAllUsers);
 router.get("/users/:id", authenticate, authorize("admin"), userController.getUserById);
+router.post("/users/:userId/grades", authenticate, authorize("admin"), userController.addSubjectToUser);
 
 module.exports = router;

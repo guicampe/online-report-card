@@ -32,6 +32,24 @@ const getUserById = async (req, res, next) => {
     }
 }
 
+const addSubjectToUser = async (req, res, next) => {
+    try {
+        const { subjectId } = req.body;
+        const { userId } = req.params;
+
+        const result = await pool.query(`
+                INSERT INTO grades (user_id, subject_id)  
+                VALUES ($1, $2)
+                RETURNING *
+            `, [userId, subjectId]
+        );
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const updateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -70,6 +88,7 @@ const deleteUser = async (req, res, next) => {
 module.exports = {
     getAllUsers,
     getUserById,
+    addSubjectToUser,
     updateUser,
     deleteUser,
 }

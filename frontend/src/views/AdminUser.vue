@@ -27,6 +27,7 @@ onMounted(async () => {
         />
         <UserSubjects 
             :subjects="grades"
+            @created="fetchGradesById(route.params.id)"
         />
     </main>
 </template>
