@@ -24,6 +24,12 @@ export const useAddSubjectToUser = () => {
             });
 
             const response = await request.json();
+
+            if (!request.ok) {
+                error.value = response.message || "Deu ruim";
+                return null;
+            }
+
             return response;
         } catch (err) {
             error.value = err;

@@ -64,6 +64,9 @@ const addSubjectToUser = async (req, res, next) => {
 
         res.status(201).json(result.rows[0]);
     } catch (error) {
+        if (error.code === "23505") {
+            return res.status(409).json({ message: "Aluno já matriculado nessa matéria" });
+        }
         next(error);
     }
 }
