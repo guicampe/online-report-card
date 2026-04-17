@@ -8,7 +8,7 @@ export const useSubjectsById = () => {
     const fetchSubjectsById = async (id) => {
         if (!authStore.token) return;
 
-        const request = await fetch(`http://localhost:3000/admin/subjects/${id}`, {
+        const request = await fetch(`http://localhost:3000/admin/subjects/${id}/grades`, {
             headers: {
                 "Authorization": `Bearer ${authStore.token}`
             }

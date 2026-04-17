@@ -11,8 +11,10 @@ router.patch("/grades/:userId/:subjectId",  authenticate, authorize("admin"), gr
 router.delete("/grades/:userId/:subjectId", authenticate, authorize("admin"), gradesController.deleteGrades);
 
 router.get("/subjects", authenticate, authorize("admin"), subjectsController.getAllSubjects);
-router.get("/subjects/:subjectId", authenticate, authorize("admin"), subjectsController.getSubjectsById);
+router.get("/subjects/:subjectId", authenticate, authorize("admin"), subjectsController.getSubjectById);
+router.get("/subjects/:subjectId/grades", authenticate, authorize("admin"), subjectsController.getSubjectsById);
 router.post("/subjects", authenticate, authorize("admin"), subjectsController.createSubject);
+router.post("/subjects/:subjectId/grades", authenticate, authorize("admin"), subjectsController.addStudentToSubject);
 router.put("/subjects/:id", authenticate, authorize("admin"), subjectsController.updateSubject);
 router.delete("/subjects/:id", authenticate, authorize("admin"), subjectsController.deleteSubject);
 

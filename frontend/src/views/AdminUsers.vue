@@ -19,6 +19,6 @@ onMounted(async () => {
                 :items="users"
                 :columns="[{ label: 'Nome', key: 'name' }]"
                 @row-click="(user) => $router.push(`/admin/${user.id}`)"
-            />
+            ></DataList>
         </div>
 </template>

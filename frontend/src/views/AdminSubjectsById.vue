@@ -1,16 +1,21 @@
 <script setup>
-import { onMounted, computed } from 'vue';
+import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useSubjectsById } from '@/composables/useSubjectsById';
 import DataList from '@/components/admin/DataList.vue';
 import Back from '@/components/layout/Back.vue';
+import AddUserInput from '@/components/admin/AddUserInput.vue';
+import { useSubjectById } from '@/composables/useSubjectById';
 
 const route = useRoute();
 const { subjects, fetchSubjectsById } = useSubjectsById();
-const subjectName = computed(() => subjects.value[0]?.subject_name ?? "");
+const { subject, fetchSubjectById } = useSubjectById();
 
 onMounted(async () => {
-    await fetchSubjectsById(route.params.id);
+    await Promise.all([
+        fetchSubjectsById(route.params.id),
+        fetchSubjectById(route.params.id)
+    ]);
 })
 </script>
 
@@ -19,11 +24,20 @@ onMounted(async () => {
         <Back />
         <DataList
             v-if="subjects.length"
-            :title="subjectName"
+            :title="subject?.name"
             :items="subjects"
             :columns="[{ label: 'Aluno', key: 'user_name' }]"
         >
+        <template #actions>
+            <AddUserInput @created="fetchSubjectsById(route.params.id)" />
+        </template>
         </DataList>
-        <p v-else class="text-center font-bold text-3xl text-gray-800">Nenhum aluno matriculado nessa matéria.</p>
+        <div v-else class="flex flex-col items-center gap-5 p-10">
+            <p class="text-center font-bold text-3xl text-gray-800">Nenhum aluno matriculado em {{ subject?.name }}</p>
+            <AddUserInput 
+                @created="fetchSubjectsById(route.params.id)" 
+                
+            />
+        </div>
     </main>
 </template>

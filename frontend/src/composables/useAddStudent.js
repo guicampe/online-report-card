@@ -1,25 +1,25 @@
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 
-export const useCreateSubject = () => {
+export const useAddStudent = () => {
     const authStore = useAuthStore();
-    const name = ref("");
+    const userId = ref("");
     const loading = ref(false);
     const error = ref(null);
 
-    const fetchCreateSubject = async () => {
+    const fetchAddStudent = async (subjectId) => {
         if (!authStore.token) return;
         loading.value = true;
         error.value = null;
 
         try {
-            const request = await fetch("http://localhost:3000/admin/subjects/", {
+            const request = await fetch(`http://localhost:3000/admin/subjects/${subjectId}/grades`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
                     "Authorization": `Bearer ${authStore.token}`
                 },
-                body: JSON.stringify({ name: name.value })
+                body: JSON.stringify({ userId: userId.value })
             });
 
             const response = await request.json();
@@ -32,5 +32,5 @@ export const useCreateSubject = () => {
         }
     };
 
-    return { name, loading, error, fetchCreateSubject };
+    return { userId, loading, error, fetchAddStudent };
 }
