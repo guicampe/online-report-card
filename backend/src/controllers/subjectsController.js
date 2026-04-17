@@ -80,6 +80,23 @@ const getSubjectsById = async (req, res, next) => {
     }
 }
 
+const getAvailableUsers = async (req, res, next) => {
+    try {
+        const { subjectId } = req.params;
+        const result = await pool.query(`
+                SELECT id, name FROM users
+                WHERE id NOT IN(
+                    SELECT user_id FROM grades WHERE subject_id = $1
+                )
+                ORDER BY name ASC
+            `, [subjectId]);
+            
+        res.status(200).json(result.rows);
+    } catch (error) {
+        next (error);
+    }
+}
+
 const createSubject = async (req, res, next) => {
     try {
         const { name } = req.body;
@@ -152,6 +169,7 @@ module.exports = {
     getMySubjects,
     getSubjectById,
     getSubjectsById,
+    getAvailableUsers,
     createSubject,
     addStudentToSubject,
     updateSubject,

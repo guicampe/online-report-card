@@ -2,13 +2,13 @@
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAddStudent } from '@/composables/useAddStudent';
-import { useUsers } from '@/composables/useUsers';
 import Loader from '../ui/Loader.vue';
+import { useAvailableUsers } from '@/composables/useAvailableUsers';
 
 const route = useRoute();
 const emit = defineEmits(["created"]);
 const { userId, loading, fetchAddStudent } = useAddStudent();
-const { users, fetchUsers } = useUsers();
+const { users, fetchAvailableUsers } = useAvailableUsers();
 
 async function handleCreate() {
     if (!userId.value)  return;
@@ -20,7 +20,7 @@ async function handleCreate() {
 }
 
 onMounted(async () => {
-    await fetchUsers();
+    await fetchAvailableUsers(route.params.id);
 })
 </script>
 

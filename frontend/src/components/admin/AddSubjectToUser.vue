@@ -2,13 +2,13 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAddSubjectToUser } from "@/composables/useAddSubjectToUser";
-import { useSubjects } from "@/composables/useSubjects";
+import { useAvailableSubjects } from "@/composables/useAvailableSubjects";
 import Loader from "../ui/Loader.vue";
 
 const route = useRoute();
 const emit = defineEmits(["created"]);
 const { subjectId, loading, fetchAddSubjectToUser } = useAddSubjectToUser();
-const { subjects, fetchSubjects } = useSubjects();
+const { subjects, fetchAvailableSubjects } = useAvailableSubjects();
 
 async function handleCreate() {
     if (!subjectId.value) return;
@@ -20,7 +20,7 @@ async function handleCreate() {
 }
 
 onMounted(async () => {
-    await fetchSubjects();
+    await fetchAvailableSubjects(route.params.id);
 })
 </script>
 

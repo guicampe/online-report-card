@@ -32,6 +32,23 @@ const getUserById = async (req, res, next) => {
     }
 }
 
+const getAvailableSubjects = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const result = await pool.query(`
+                SELECT id, name FROM subjects
+                WHERE id NOT IN(
+                    SELECT subject_id FROM grades WHERE user_id = $1
+                )
+                ORDER BY name ASC
+            `, [userId]);
+
+        res.status(200).json(result.rows);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const addSubjectToUser = async (req, res, next) => {
     try {
         const { subjectId } = req.body;
@@ -88,6 +105,7 @@ const deleteUser = async (req, res, next) => {
 module.exports = {
     getAllUsers,
     getUserById,
+    getAvailableSubjects,
     addSubjectToUser,
     updateUser,
     deleteUser,
